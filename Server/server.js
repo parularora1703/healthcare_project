@@ -1,29 +1,22 @@
-//FRAMEWORK CONFIGURATION
-const express=require("express");
-const connectDb=require("./config/dbConnection");
-const errorHandler=require("./middleware/errorHandler");
-const cors=require("cors");
-
-//env file config
-const dotenv=require("dotenv");
-dotenv.config();
+const express = require("express");
+const connectDb = require("./config/dbConnection.js");
+const errorHandler = require("./middlewares/errorHandler");
+const cors = require("cors");
+const dotenv = require("dotenv").config();
 
 connectDb();
-const app=express();
-const port=process.env.PORT || 5000;
-
+const app = express();
+const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
+app.use(errorHandler);
+app.set('view engine','hbs');
 
-//Error handling middleware
-app.use(errorHandler());
 
-//ROUTES BELOW
-app.get('/', (req,res) => {
-    res.send("working");
-});
+app.get('/', (req, res) => {
+    res.send("Working");
+})
 
-//APP CONFIG START
 app.listen(port, () => {
-    console.log(`Server running on port http://localhost:${port}`);
+    console.log(`Server is running on port http://localhost:${port}`);
 });
