@@ -2,7 +2,8 @@ const express = require("express");
 const connectDb = require("./config/dbConnection.js");
 const errorHandler = require("./middlewares/errorHandler");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 const hbs = require("hbs");
 const path = require("path");
 
@@ -11,6 +12,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
+
+// rute for registration and authentication
+app.use("/api/register", require("../server/routes/userRoutes.js"));
+
 app.use(errorHandler);
 app.set('view engine','hbs');
 
