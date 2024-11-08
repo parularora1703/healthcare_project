@@ -8,5 +8,11 @@
 <body>
     {{>header}}
     <h1>This is home page {{username}}</h1>
+    <div>
+        <form action="/profile" method="post" enctype="multipart/form-data">
+            <input type="file" name="avatar" />
+            <input type="submit" value="Upload" />
+        </form>
+    </div>
 </body>
 </html>
